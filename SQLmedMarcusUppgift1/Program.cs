@@ -6,7 +6,7 @@ namespace SQLmedMarcusUppgift1
     {
         static void Main()
         {
-            
+            SetUp();
         }
     }
 }
