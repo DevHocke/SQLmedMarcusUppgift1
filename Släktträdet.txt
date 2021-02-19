@@ -1,0 +1,16 @@
+Malia, Obama, 1998-12-13, 0, 4, 3
+Sasha, Obama, 2001-01-19, 0, 4, 3
+Barack, Obama, 1961-03-24, 0, 6, 5
+Michelle, Obama, 1964-09-30, 0, 12, 11
+Barack. Sr, Obama, 1936-08-22, 1982-07-14, 8, 7
+Ann, Dunham, 1942-11-07, 1995-01-28, 10, 9
+Hussein, Obama, 1895-10-23, 1979-04-15, 0, 0
+Akumu, Nyanjoga, 1918-03-12, 2006-06-19, 0, 0
+Stanley, Dunham, 1895-11-11, 1979-12-04, 0, 0
+Madelyn, Paune, 1922-06-04, 2008-05-12, 0, 0
+Fraser III, Robinson, 1935-08-01, 1991-03-06, 14, 13
+Marian, Shields, 1937-06-29, 0, 15, 16
+Fraser II, Robinson, 1912-08-24, 1996-11-09, 0, 0
+Delores, Johnson, 1915-02-06, 1996-11-09, 0, 0
+Purnell, Shields, 1910-12-19, 1983-06-30, 0, 0
+Rebecca, Jumper, 1909-04-05, 1988-01-24, 0, 0
