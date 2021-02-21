@@ -115,6 +115,37 @@ namespace SQLmedMarcusUppgift1
             };
             ExecuteQuery(query, parameters);
         }
+        public void DeletePerson(List<string> person)
+        {
+            string query = "DELETE FROM Obamas WHERE ID = @id";
+            ExecuteQuery(query, ("@id", person[0]));
+            query = "SELECT * FROM Obamas";
+            DataTable dataTable = GetDataTable(query);
+            List<List<string>> people = GetListOfPersons(dataTable);
+            foreach (List<string> pers in people)
+            {
+                if (pers[5] == person[0])
+                {
+                    pers[5] = "0";
+                    UpdatePerson(pers);
+                }
+                else if (pers[6] == person[0])
+                {
+                    pers[6] = "0";
+                    UpdatePerson(pers);
+                }
+            }
 
+        }
+
+        private void UpdatePerson(List<string> pers)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<List<string>> GetListOfPersons(DataTable dataTable)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -67,6 +67,12 @@ namespace SQLmedMarcusUppgift1
             throw new NotImplementedException();
         }
 
+        public static void AddToList(string question, List<string> person)
+        {
+            Console.Write(question);
+            person.Add(Console.ReadLine());
+        }
+
         private void AddPerson()
         {
             throw new NotImplementedException();
