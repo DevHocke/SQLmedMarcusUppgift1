@@ -177,7 +177,24 @@ namespace SQLmedMarcusUppgift1
 
         private void ShowSiblings(List<string> person)
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            Crud crud = new Crud();
+            List<List<string>> siblings = crud.GetSiblings(person);
+            if (siblings.Count > 0)
+            {
+                Console.WriteLine("Siblings");
+                int counter = 1;
+                foreach (List<string> sibling in siblings)
+                {
+                    Console.WriteLine($"{counter++}. {sibling[1]} {sibling[2]} {sibling[3]}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"{person[1]} {person[2]} does not have any siblings.");
+            }
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey();
         }
 
         private void DeletePerson(List<string> person)
@@ -318,7 +335,9 @@ namespace SQLmedMarcusUppgift1
 
         private string GetLastAddedId()
         {
-            throw new NotImplementedException();
+            Crud crud = new Crud();
+            List<List<string>> people = crud.GetAllObamas();
+            return people[^1][0];
         }
 
         private void DisplayInfo(List<string> person)

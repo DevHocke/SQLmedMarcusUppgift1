@@ -191,7 +191,11 @@ namespace SQLmedMarcusUppgift1
                     UpdatePerson(pers);
                 }
             }
+        }
 
+        internal List<List<string>> GetSiblings(List<string> person)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
