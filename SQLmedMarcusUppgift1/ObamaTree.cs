@@ -32,8 +32,9 @@ namespace SQLmedMarcusUppgift1
                 crud.FillObamaTree(table, lines);
             }
         }
+
         /// <summary>
-        /// The opening menu for the program, from this menu the user 
+        /// The opening menu for the program, from this menu the user
         /// is sent to other menus depending of the choices made.
         /// </summary>
         public void StartMenu()
@@ -70,6 +71,7 @@ namespace SQLmedMarcusUppgift1
                 }
             }
         }
+
         /// <summary>
         /// Opens a menu that lets the user do a different searches on the selected person.
         /// </summary>
@@ -153,6 +155,7 @@ namespace SQLmedMarcusUppgift1
                 }
             }
         }
+
         /// <summary>
         /// Opens a menu where the user can choose what part / parts of the person to edit.
         /// </summary>
@@ -195,6 +198,7 @@ namespace SQLmedMarcusUppgift1
                 }
             }
         }
+
         /// <summary>
         /// Shows the user who the persons siblings are, if any at all.
         /// </summary>
@@ -220,6 +224,7 @@ namespace SQLmedMarcusUppgift1
             Console.WriteLine("Press any key to continue.");
             Console.ReadKey();
         }
+
         /// <summary>
         /// Lets the user delete a person from the database.
         /// </summary>
@@ -238,6 +243,7 @@ namespace SQLmedMarcusUppgift1
                 SearchObamaTree();
             }
         }
+
         /// <summary>
         /// Lets the user edit a persons details.
         /// </summary>
@@ -354,6 +360,7 @@ namespace SQLmedMarcusUppgift1
                 crud.UpdatePerson(person);
             }
         }
+
         /// <summary>
         /// Makes a check if the users choice of parent exists in the database.
         /// If not the option to add a mother or father or link a existing one to the person.
@@ -375,6 +382,7 @@ namespace SQLmedMarcusUppgift1
                 return "0";
             }
         }
+
         /// <summary>
         /// Checks for the last added ID in the database so it can be used as mother or father ID for a person.
         /// </summary>
@@ -385,6 +393,7 @@ namespace SQLmedMarcusUppgift1
             List<List<string>> people = crud.GetAllObamas();
             return people[^1][0];
         }
+
         /// <summary>
         /// Displays the user´s selected person on top in the console window.
         /// </summary>
@@ -418,6 +427,7 @@ namespace SQLmedMarcusUppgift1
             }
             Console.WriteLine("\n");
         }
+
         /// <summary>
         /// Adds the users inputs to the database.
         /// </summary>
@@ -428,6 +438,7 @@ namespace SQLmedMarcusUppgift1
             Console.Write(question);
             person.Add(Console.ReadLine());
         }
+
         /// <summary>
         /// Lets the user add a person and make inputs for first and last name along with date of birth.
         /// som skall läggas till i databasen.

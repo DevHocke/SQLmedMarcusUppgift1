@@ -9,6 +9,7 @@ namespace SQLmedMarcusUppgift1
     {
         public string ConnectionString { get; set; } = @"Data Source=.\SQLExpress;Integrated Security=true; database={0}";
         public string DatabaseName { get; set; } = "ObamaTree";
+
         /// <summary>
         /// Checks if the database allready exists.
         /// </summary>
@@ -31,6 +32,7 @@ namespace SQLmedMarcusUppgift1
             }
             return false;
         }
+
         /// <summary>
         /// Creates the database ObamaTree if it does not exist.
         /// </summary>
@@ -41,6 +43,7 @@ namespace SQLmedMarcusUppgift1
             ExecuteQuery(query);
             DatabaseName = dBName;
         }
+
         /// <summary>
         /// Creates the table Obamas if it does not exist.
         /// </summary>
@@ -52,6 +55,11 @@ namespace SQLmedMarcusUppgift1
             ExecuteQuery(query);
         }
 
+        /// <summary>
+        /// Fills the ObamaTree database with table content.
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="lines"></param>
         internal void FillObamaTree(string table, string[] lines)
         {
             foreach (string line in lines)
@@ -59,6 +67,7 @@ namespace SQLmedMarcusUppgift1
                 AddToTable(table, line);
             }
         }
+
         /// <summary>
         /// Takes a query and alt parameters using params modifier.
         /// Connects to the database, does magic and then returns a datatable.
@@ -88,6 +97,7 @@ namespace SQLmedMarcusUppgift1
             }
             return dataTable;
         }
+
         /// <summary>
         /// Executes a query and adds the users inputs to the table.
         /// </summary>
@@ -111,6 +121,12 @@ namespace SQLmedMarcusUppgift1
             ExecuteQuery(query, parameters);
         }
 
+        /// <summary>
+        /// This method is used to execute querys depending on what the user wants to do
+        /// with the database.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
         private void ExecuteQuery(string query, params (string name, string value)[] parameters)
         {
             string connectionString = string.Format(ConnectionString, DatabaseName);
@@ -128,6 +144,10 @@ namespace SQLmedMarcusUppgift1
             }
         }
 
+        /// <summary>
+        /// This query checks for persons with missing data and displays them to the user.
+        /// </summary>
+        /// <returns></returns>
         internal List<List<string>> MissingData()
         {
             string query = "SELECT * FROM Obamas WHERE date_of_death = '0' OR mother_id = 0 OR father_id = 0";
@@ -135,6 +155,10 @@ namespace SQLmedMarcusUppgift1
             return GetListOfPersons(dataTable);
         }
 
+        /// <summary>
+        /// This query displays everyone in the list to the user.
+        /// </summary>
+        /// <returns></returns>
         internal List<List<string>> GetAllObamas()
         {
             string query = "SELECT * FROM Obamas";
@@ -142,6 +166,11 @@ namespace SQLmedMarcusUppgift1
             return GetListOfPersons(dataTable);
         }
 
+        /// <summary>
+        /// This query displays every person matching the users search terms.
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public List<List<string>> SearchByYear(string year)
         {
             string query = "SELECT * FROM Obamas WHERE date_of_birth LIKE @year";
@@ -149,6 +178,12 @@ namespace SQLmedMarcusUppgift1
             return GetListOfPersons(dataTable);
         }
 
+        /// <summary>
+        /// This query displays perosns matching the users coice of names to search for.
+        /// If present in the database the person / persons are displayed for the user.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public List<List<string>> SearchByName(string name)
         {
             string query = "SELECT * FROM Obamas WHERE ";
@@ -175,6 +210,10 @@ namespace SQLmedMarcusUppgift1
             return GetListOfPersons(dataTable);
         }
 
+        /// <summary>
+        /// This query takes the users inputs for a created person and adds them to the database.
+        /// </summary>
+        /// <param name="person"></param>
         internal void CreatePerson(List<string> person)
         {
             string query = "INSERT INTO Obamas (first_name, last_name, date_of_birth, date_of_death, mother_id, father_id)" +
@@ -191,6 +230,10 @@ namespace SQLmedMarcusUppgift1
             ExecuteQuery(query, parameters);
         }
 
+        /// <summary>
+        /// This query deletes the users choosen person to delete from the database.
+        /// </summary>
+        /// <param name="person"></param>
         public void DeletePerson(List<string> person)
         {
             string query = "DELETE FROM Obamas WHERE ID = @id";
@@ -213,6 +256,11 @@ namespace SQLmedMarcusUppgift1
             }
         }
 
+        /// <summary>
+        /// This query searches the mother and father ID´s to find siblings of a person.
+        /// </summary>
+        /// <param name="person"></param>
+        /// <returns></returns>
         public List<List<string>> GetSiblings(List<string> person)
         {
             string query = "SELECT * FROM Obamas WHERE (mother_id = @mId AND mother_id > 0) OR (father_id = @fId AND father_id > 0)";
@@ -248,6 +296,11 @@ namespace SQLmedMarcusUppgift1
             ExecuteQuery(query, parameters);
         }
 
+        /// <summary>
+        /// Takes in a datatable and returns the list of persons in it.
+        /// </summary>
+        /// <param name="dataTable"></param>
+        /// <returns></returns>
         private List<List<string>> GetListOfPersons(DataTable dataTable)
         {
             List<List<string>> persons = new List<List<string>>();
@@ -261,6 +314,12 @@ namespace SQLmedMarcusUppgift1
             return persons;
         }
 
+        /// <summary>
+        /// This query searches the users choice of birth date.
+        /// If a person with the birthday exists the person is displayed in the console.
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public List<List<string>> SearchbyYear(string year)
         {
             string query = "SELECT * FROM Obamas WHERE date_of_birth LIKE @year";
@@ -268,6 +327,11 @@ namespace SQLmedMarcusUppgift1
             return GetListOfPersons(dataTable);
         }
 
+        /// <summary>
+        /// Checks if a person exists and if so displays the person to the user in the console.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         internal List<string> SearchById(string id)
         {
             string query = "SELECT * FROM Obamas WHERE ID = @id";
@@ -279,6 +343,11 @@ namespace SQLmedMarcusUppgift1
             return new List<string>();
         }
 
+        /// <summary>
+        /// Takes in a datarows content and stores the info in a List of strings wich is then returned.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <returns></returns>
         private List<string> RowToList(DataRow row)
         {
             List<string> person = new List<string>();
