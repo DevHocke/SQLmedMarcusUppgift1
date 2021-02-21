@@ -103,12 +103,16 @@ namespace SQLmedMarcusUppgift1
 
         internal List<List<string>> MissingData()
         {
-            throw new NotImplementedException();
+            string query = "SELECT * FROM Obamas WHERE date_of_death = '0' OR mother_id = 0 OR father_id = 0";
+            DataTable dataTable = GetDataTable(query);
+            return GetListOfPersons(dataTable);
         }
 
         internal List<List<string>> GetAllObamas()
         {
-            throw new NotImplementedException();
+            string query = "SELECT * FROM Obamas";
+            DataTable dataTable = GetDataTable(query);
+            return GetListOfPersons(dataTable);
         }
 
         public List<List<string>> SearchByYear(string year)
