@@ -6,7 +6,10 @@ namespace SQLmedMarcusUppgift1
     {
         static void Main()
         {
-            SetUp();
+            ObamaTree obama = new ObamaTree();
+            obama.SetUp();
+            obama.MainMenu();
+            Console.ReadLine();
         }
     }
 }
