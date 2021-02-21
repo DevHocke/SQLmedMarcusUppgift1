@@ -138,6 +138,63 @@ namespace SQLmedMarcusUppgift1
             }
         }
 
+        private void SelectedPerson(List<string> person)
+        {
+
+            bool keepGoing = true;
+            while (keepGoing)
+            {
+                Console.Clear();
+                DisplayInfo(person);
+                Console.WriteLine("What do you want to do?");
+                Console.WriteLine("1. Edit person. ");
+                Console.WriteLine("2. Delete Person.");
+                Console.WriteLine("3. Show siblings.");
+                Console.WriteLine("4. Go back.");
+                int.TryParse(Console.ReadLine(), out int choice);
+                switch (choice)
+                {
+                    case 1:
+                        EditPerson(person);
+                        break;
+                    case 2:
+                        DeletePerson(person);
+                        break;
+                    case 3:
+                        ShowSiblings(person);
+                        break;
+                    case 4:
+                        SearchObamaTree();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, try again! Press any key to continue.");
+                        Console.ReadKey();
+                        break;
+                }
+
+            }
+        }
+
+        private void ShowSiblings(List<string> person)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeletePerson(List<string> person)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void EditPerson(List<string> person)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DisplayInfo(List<string> person)
+        {
+            throw new NotImplementedException();
+        }
+
         public static void AddToList(string question, List<string> person)
         {
             Console.Write(question);
@@ -159,5 +216,6 @@ namespace SQLmedMarcusUppgift1
             crud.CreatePerson(person);
             Console.WriteLine(person[0] + " " + person[1] + "was added to the ObamaTree!");
         }
+        
     }
 }
