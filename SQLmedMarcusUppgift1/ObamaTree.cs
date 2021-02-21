@@ -91,7 +91,7 @@ namespace SQLmedMarcusUppgift1
                         break;
                     case 4:
                         Console.Write("Enter a year: ");
-                        persons = crud.SearchbyYear(Console.ReadLine());
+                        persons = crud.SearchByYear(Console.ReadLine());
                         break;
                     case 5:
                         MainMenu();

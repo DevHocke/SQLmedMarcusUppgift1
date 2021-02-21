@@ -101,6 +101,23 @@ namespace SQLmedMarcusUppgift1
             }
         }
 
+        internal List<List<string>> MissingData()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal List<List<string>> GetAllObamas()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<List<string>> SearchByYear(string year)
+        {
+            string query = "SELECT * FROM Obamas WHERE date_of_birth LIKE @year";
+            DataTable dataTable = GetDataTable(query, ("@year", $"{year}%"));
+            return GetListOfPersons(dataTable);
+        }
+
         internal List<List<string>> SearchByName(string v)
         {
             throw new NotImplementedException();
