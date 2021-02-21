@@ -122,9 +122,32 @@ namespace SQLmedMarcusUppgift1
             return GetListOfPersons(dataTable);
         }
 
-        internal List<List<string>> SearchByName(string v)
+        public List<List<string>> SearchByName(string name)
         {
-            throw new NotImplementedException();
+
+
+            string query = "SELECT * FROM Obamas WHERE ";
+            (string, string)[] parameters;
+            if (name.Contains(" "))
+            {
+                string[] names = name.Split(" ");
+                query += "first_name LIKE @fName OR last_name LIKE @lName";
+                parameters = new (string, string)[]
+                {
+                    ("@fName", $"{names[0]}%"),
+                    ("@lName", $"{names[1]}%")
+                };
+            }
+            else
+            {
+                query += "first_name LIKE @name OR last_name LIKE @name";
+                parameters = new (string, string)[]
+                {
+                    ("@name", $"{name}%")
+                };
+            }
+            DataTable dataTable = GetDataTable(query, parameters);
+            return GetListOfPersons(dataTable);
         }
 
         internal void CreateTable(string tableName, string columns)
@@ -209,7 +232,16 @@ namespace SQLmedMarcusUppgift1
 
         private List<string> RowToList(DataRow row)
         {
-            throw new NotImplementedException();
+            List<string> person = new List<string>();
+            person.Add(row["ID"].ToString());
+            person.Add(row["first_name"].ToString());
+            person.Add(row["last_name"].ToString());
+            person.Add(row["date_of_birth"].ToString());
+            person.Add(row["date_of_death"].ToString());
+            person.Add(row["mother_id"].ToString());
+            person.Add(row["father_id"].ToString());
+
+            return person;
         }
     }
 }
