@@ -90,6 +90,7 @@ namespace SQLmedMarcusUppgift1
             };
             ExecuteQuery(query, parameters);   
         }
+
         private void ExecuteQuery(string query, params (string name, string value)[] parameters)
         {
             string connectionString = string.Format(ConnectionString, DatabaseName);
@@ -227,6 +228,22 @@ namespace SQLmedMarcusUppgift1
                 }
             }
             return persons;
+        }
+        public List<List<string>> SearchbyYear(string year)
+        {
+            string query = "SELECT * FROM Obamas WHERE date_of_birth LIKE @year";
+            DataTable dataTable = GetDataTable(query, ("@year", $"{year}%"));
+            return GetListOfPersons(dataTable);
+        }
+        internal List<string> SearchById(string id)
+        {
+            string query = "SELECT * FROM Obamas WHERE ID = @id";
+            DataTable datatable = GetDataTable(query, ("@id", id));
+            if (datatable.Rows.Count > 0)
+            {
+                return RowToList(datatable.Rows[0]);
+            }
+            return new List<string>();
         }
 
         private List<string> RowToList(DataRow row)
