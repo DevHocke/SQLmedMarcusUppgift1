@@ -9,7 +9,11 @@ namespace SQLmedMarcusUppgift1
     {
         public string ConnectionString { get; set; } = @"Data Source=.\SQLExpress;Integrated Security=true; database={0}";
         public string DatabaseName { get; set; } = "ObamaTree";
-
+        /// <summary>
+        /// Kontrollerar om databasen redan finns.
+        /// </summary>
+        /// <param name="dbname"></param>
+        /// <returns></returns>
         public bool DoesDatabaseExist(string dbname)
         {
             string query = "SELECT name FROM sys.databases";
@@ -27,14 +31,21 @@ namespace SQLmedMarcusUppgift1
             }
             return false;
         }
-
+        /// <summary>
+        /// Skapar upp databasen ObamaTree om den inte redan finns.
+        /// </summary>
+        /// <param name="dBName"></param>
         public void CreateDatabase(string dBName)
         {
             string query = $"CREATE DATABASE {dBName}";
             ExecuteQuery(query);
             DatabaseName = dBName;
         }
-
+        /// <summary>
+        /// Skapar tabellen Obamas om den inte redan finns.
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="columns"></param>
         internal void CreateTable(string tableName, string columns)
         {
             string query = $"CREATE TABLE {tableName} ({columns})";
@@ -48,8 +59,14 @@ namespace SQLmedMarcusUppgift1
                 AddToTable(table, line);
             }
         }
-
-        public DataTable GetDataTable(string query, params (string name, string value)[] parameters) // name = @, value = variablen vi skyddat med key.
+        /// <summary>
+        /// Tar emot en query och alternativa parametrar med params modifier.
+        /// Kopplar upp sig mot databasen  och returnerar en datatable.
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public DataTable GetDataTable(string query, params (string name, string value)[] parameters)
         {
             DataTable dataTable = new DataTable();
             string connectionString = string.Format(ConnectionString, DatabaseName);
@@ -71,7 +88,11 @@ namespace SQLmedMarcusUppgift1
             }
             return dataTable;
         }
-
+        /// <summary>
+        /// kör queryn mot databasen och lägger till personen användaren matat in.
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="line"></param>
         public void AddToTable(string table, string line)
         {
             string query = $"INSERT INTO {table} (first_name, last_name, " +
