@@ -182,7 +182,17 @@ namespace SQLmedMarcusUppgift1
 
         private void DeletePerson(List<string> person)
         {
-            throw new NotImplementedException();
+            Crud crud = new Crud();
+            Console.WriteLine($"Do you really want to delete {person[1]} {person[2]}? (y/n) ");
+            string choice = Console.ReadLine().ToLower();
+            if (choice == "y")
+            {
+                crud.DeletePerson(person);
+                Console.WriteLine($"{person[1]} {person[2]} was deleted");
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadKey();
+                SearchObamaTree();
+            }
         }
 
         private void EditPerson(List<string> person)
