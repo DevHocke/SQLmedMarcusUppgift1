@@ -115,5 +115,6 @@ namespace SQLmedMarcusUppgift1
             };
             ExecuteQuery(query, parameters);
         }
+
     }
 }
