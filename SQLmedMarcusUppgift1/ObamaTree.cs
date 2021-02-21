@@ -36,18 +36,18 @@ namespace SQLmedMarcusUppgift1
             {
                 Console.Clear();
                 Console.WriteLine("Welcome to the ObamaTree! What do you want to do? ");
-                Console.WriteLine("1. Add a person: ");
-                Console.WriteLine("2. Search ObamaTree: ");
+                Console.WriteLine("1. Search ObamaTree: ");
+                Console.WriteLine("2. Add a person: ");
                 Console.WriteLine("3. Exit program");
                 int.TryParse(Console.ReadLine(), out int choice);
                 switch (choice)
                 {
                     case 1:
-                        AddPerson();
+                        SearchObamaTree();
                         break;
 
                     case 2:
-                        SearchObamaTree();
+                        AddPerson();
                         break;
 
                     case 3:
