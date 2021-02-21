@@ -8,8 +8,8 @@ namespace SQLmedMarcusUppgift1
     internal class ObamaTree
     {
         /// <summary>
-        /// Kontrollerar om databasen ObamaTree finns.
-        /// Gör den inte det så skapas den.
+        /// Checks if the database ObamaTree exists.
+        /// If not it creates it.
         /// </summary>
         public void SetUp()
         {
@@ -33,8 +33,8 @@ namespace SQLmedMarcusUppgift1
             }
         }
         /// <summary>
-        /// Start menyn för programmet, från denna menyn tar sig användaren
-        /// vidare till alla andra menyer beroende på val.
+        /// The opening menu for the program, from this menu the user 
+        /// is sent to other menus depending of the choices made.
         /// </summary>
         public void StartMenu()
         {
@@ -71,7 +71,7 @@ namespace SQLmedMarcusUppgift1
             }
         }
         /// <summary>
-        /// Menyn där användaren kan göra en rad olika sökningar på den valda personen.
+        /// Opens a menu that lets the user do a different searches on the selected person.
         /// </summary>
         private void SearchObamaTree()
         {
@@ -154,7 +154,7 @@ namespace SQLmedMarcusUppgift1
             }
         }
         /// <summary>
-        /// Menyn där användaren kan välja vilka delar av personen som skall editeras.
+        /// Opens a menu where the user can choose what part / parts of the person to edit.
         /// </summary>
         /// <param name="person"></param>
         private void SelectedPerson(List<string> person)
@@ -196,7 +196,7 @@ namespace SQLmedMarcusUppgift1
             }
         }
         /// <summary>
-        /// Metoden visar användaren vilka, om några syskon vald person har.
+        /// Shows the user who the persons siblings are, if any at all.
         /// </summary>
         /// <param name="person"></param>
         private void ShowSiblings(List<string> person)
@@ -221,7 +221,7 @@ namespace SQLmedMarcusUppgift1
             Console.ReadKey();
         }
         /// <summary>
-        /// Metoden DeletePerson() låter användaren ta bort en person från databasen.
+        /// Lets the user delete a person from the database.
         /// </summary>
         /// <param name="person"></param>
         private void DeletePerson(List<string> person)
@@ -239,7 +239,7 @@ namespace SQLmedMarcusUppgift1
             }
         }
         /// <summary>
-        /// Låter användaren editera en persons alla delar i databasen.
+        /// Lets the user edit a persons details.
         /// </summary>
         /// <param name="person"></param>
         private void EditPerson(List<string> person)
@@ -355,9 +355,8 @@ namespace SQLmedMarcusUppgift1
             }
         }
         /// <summary>
-        /// Kontrollerar om användarens inmatade förälder redan finns i databasen och ger användaren
-        /// möjlighet att skapa en mor eller far förälder eller använda en befintlig person som förälder.
-        /// 
+        /// Makes a check if the users choice of parent exists in the database.
+        /// If not the option to add a mother or father or link a existing one to the person.
         /// </summary>
         /// <param name="parent"></param>
         /// <param name="type"></param>
@@ -377,8 +376,7 @@ namespace SQLmedMarcusUppgift1
             }
         }
         /// <summary>
-        /// Kontrollerar vilket id personen som sist lades till har.
-        /// Detta för att kunna använda det ID´t till att lägga till Mother och Father ID.
+        /// Checks for the last added ID in the database so it can be used as mother or father ID for a person.
         /// </summary>
         /// <returns></returns>
         private string GetLastAddedId()
@@ -388,7 +386,7 @@ namespace SQLmedMarcusUppgift1
             return people[^1][0];
         }
         /// <summary>
-        /// Visar vald persons info högst upp i konsolen för användaren.
+        /// Displays the user´s selected person on top in the console window.
         /// </summary>
         /// <param name="person"></param>
         private static void DisplayInfo(List<string> person)
@@ -421,7 +419,7 @@ namespace SQLmedMarcusUppgift1
             Console.WriteLine("\n");
         }
         /// <summary>
-        /// Lägger till användarens inmatningar i databasen.
+        /// Adds the users inputs to the database.
         /// </summary>
         /// <param name="question"></param>
         /// <param name="person"></param>
@@ -431,7 +429,7 @@ namespace SQLmedMarcusUppgift1
             person.Add(Console.ReadLine());
         }
         /// <summary>
-        /// Låter användaren mata in för och efternamn samt födelsedata på personen
+        /// Lets the user add a person and make inputs for first and last name along with date of birth.
         /// som skall läggas till i databasen.
         /// </summary>
         private void AddPerson()

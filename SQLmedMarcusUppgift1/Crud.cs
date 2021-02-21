@@ -10,7 +10,7 @@ namespace SQLmedMarcusUppgift1
         public string ConnectionString { get; set; } = @"Data Source=.\SQLExpress;Integrated Security=true; database={0}";
         public string DatabaseName { get; set; } = "ObamaTree";
         /// <summary>
-        /// Kontrollerar om databasen redan finns.
+        /// Checks if the database allready exists.
         /// </summary>
         /// <param name="dbname"></param>
         /// <returns></returns>
@@ -32,7 +32,7 @@ namespace SQLmedMarcusUppgift1
             return false;
         }
         /// <summary>
-        /// Skapar upp databasen ObamaTree om den inte redan finns.
+        /// Creates the database ObamaTree if it does not exist.
         /// </summary>
         /// <param name="dBName"></param>
         public void CreateDatabase(string dBName)
@@ -42,7 +42,7 @@ namespace SQLmedMarcusUppgift1
             DatabaseName = dBName;
         }
         /// <summary>
-        /// Skapar tabellen Obamas om den inte redan finns.
+        /// Creates the table Obamas if it does not exist.
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="columns"></param>
@@ -60,8 +60,8 @@ namespace SQLmedMarcusUppgift1
             }
         }
         /// <summary>
-        /// Tar emot en query och alternativa parametrar med params modifier.
-        /// Kopplar upp sig mot databasen  och returnerar en datatable.
+        /// Takes a query and alt parameters using params modifier.
+        /// Connects to the database, does magic and then returns a datatable.
         /// </summary>
         /// <param name="query"></param>
         /// <param name="parameters"></param>
@@ -89,7 +89,7 @@ namespace SQLmedMarcusUppgift1
             return dataTable;
         }
         /// <summary>
-        /// kör queryn mot databasen och lägger till personen användaren matat in.
+        /// Executes a query and adds the users inputs to the table.
         /// </summary>
         /// <param name="table"></param>
         /// <param name="line"></param>
