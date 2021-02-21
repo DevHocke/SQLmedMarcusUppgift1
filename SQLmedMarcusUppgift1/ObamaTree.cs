@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Threading;
 
 namespace SQLmedMarcusUppgift1
 {
-    class ObamaTree
+    internal class ObamaTree
     {
         public void SetUp()
         {
@@ -46,14 +45,17 @@ namespace SQLmedMarcusUppgift1
                     case 1:
                         AddPerson();
                         break;
+
                     case 2:
                         SearchObamaTree();
                         break;
+
                     case 3:
                         Console.WriteLine("Bye bye. . .");
                         Thread.Sleep(2000);
                         Environment.Exit(0);
                         break;
+
                     default:
                         Console.WriteLine("Invalid choice, try again! Press any key to continue.");
                         Console.ReadKey();
@@ -83,19 +85,24 @@ namespace SQLmedMarcusUppgift1
                         Console.Write("Enter a name: ");
                         persons = crud.SearchByName(Console.ReadLine());
                         break;
+
                     case 2:
                         persons = crud.MissingData();
                         break;
+
                     case 3:
                         persons = crud.GetAllObamas();
                         break;
+
                     case 4:
                         Console.Write("Enter a year: ");
                         persons = crud.SearchByYear(Console.ReadLine());
                         break;
+
                     case 5:
                         MainMenu();
                         break;
+
                     default:
                         Console.WriteLine("Invalid choice, try again! Press any key to continue.");
                         Console.ReadKey();
@@ -140,7 +147,6 @@ namespace SQLmedMarcusUppgift1
 
         private void SelectedPerson(List<string> person)
         {
-
             bool keepGoing = true;
             while (keepGoing)
             {
@@ -157,21 +163,24 @@ namespace SQLmedMarcusUppgift1
                     case 1:
                         EditPerson(person);
                         break;
+
                     case 2:
                         DeletePerson(person);
                         break;
+
                     case 3:
                         ShowSiblings(person);
                         break;
+
                     case 4:
                         SearchObamaTree();
                         break;
+
                     default:
                         Console.WriteLine("Invalid choice, try again! Press any key to continue.");
                         Console.ReadKey();
                         break;
                 }
-
             }
         }
 
@@ -235,18 +244,22 @@ namespace SQLmedMarcusUppgift1
                         Console.Write("First name: ");
                         person[1] = Console.ReadLine();
                         break;
+
                     case 2:
                         Console.Write("Last name: ");
                         person[2] = Console.ReadLine();
                         break;
+
                     case 3:
                         Console.Write("Date of birth: ");
                         person[3] = Console.ReadLine();
                         break;
+
                     case 4:
                         Console.Write("Date of death: ");
                         person[4] = Console.ReadLine();
                         break;
+
                     case 5:
                         Console.Write("Enter mother's name: ");
                         string mother = Console.ReadLine();
@@ -279,6 +292,7 @@ namespace SQLmedMarcusUppgift1
                             person[5] = CreateParent(mother, "her");
                         }
                         break;
+
                     case 6:
                         Console.Write("Enter father's name: ");
                         string father = Console.ReadLine();
@@ -306,16 +320,18 @@ namespace SQLmedMarcusUppgift1
                             person[6] = CreateParent(father, "him");
                         }
                         break;
+
                     case 7:
                         keepGoing = false;
                         break;
+
                     default:
                         Console.WriteLine("Invalid choice, try again! Press any key to continue.");
                         Console.ReadKey();
                         break;
                 }
                 crud.UpdatePerson(person);
-            } 
+            }
         }
 
         private string CreateParent(string parent, string type)
@@ -391,6 +407,5 @@ namespace SQLmedMarcusUppgift1
             crud.CreatePerson(person);
             Console.WriteLine(person[0] + " " + person[1] + "was added to the ObamaTree!");
         }
-        
     }
 }

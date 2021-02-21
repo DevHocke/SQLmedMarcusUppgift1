@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 
 namespace SQLmedMarcusUppgift1
 {
-    class Crud
+    internal class Crud
     {
         public string ConnectionString { get; set; } = @"Data Source=.\SQLExpress;Integrated Security=true; database={0}";
         public string DatabaseName { get; set; } = "ObamaTree";
@@ -89,7 +87,7 @@ namespace SQLmedMarcusUppgift1
                 ("@mId", info[4]),
                 ("@fId", info[5])
             };
-            ExecuteQuery(query, parameters);   
+            ExecuteQuery(query, parameters);
         }
 
         private void ExecuteQuery(string query, params (string name, string value)[] parameters)
@@ -132,7 +130,6 @@ namespace SQLmedMarcusUppgift1
 
         public List<List<string>> SearchByName(string name)
         {
-
             string query = "SELECT * FROM Obamas WHERE ";
             (string, string)[] parameters;
             if (name.Contains(" "))
@@ -172,6 +169,7 @@ namespace SQLmedMarcusUppgift1
             };
             ExecuteQuery(query, parameters);
         }
+
         public void DeletePerson(List<string> person)
         {
             string query = "DELETE FROM Obamas WHERE ID = @id";
@@ -241,12 +239,14 @@ namespace SQLmedMarcusUppgift1
             }
             return persons;
         }
+
         public List<List<string>> SearchbyYear(string year)
         {
             string query = "SELECT * FROM Obamas WHERE date_of_birth LIKE @year";
             DataTable dataTable = GetDataTable(query, ("@year", $"{year}%"));
             return GetListOfPersons(dataTable);
         }
+
         internal List<string> SearchById(string id)
         {
             string query = "SELECT * FROM Obamas WHERE ID = @id";

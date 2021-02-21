@@ -2,9 +2,9 @@
 
 namespace SQLmedMarcusUppgift1
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private static void Main()
         {
             ObamaTree obama = new ObamaTree();
             obama.SetUp();
