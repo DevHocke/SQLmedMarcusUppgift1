@@ -170,6 +170,7 @@ namespace SQLmedMarcusUppgift1
             }
 
         }
+
         /// <summary>
         /// Sends the query and paremeters to the method ExecuteQuery
         /// where the person UpdatePerson() takes in is updated.
