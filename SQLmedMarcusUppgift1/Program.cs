@@ -8,7 +8,7 @@ namespace SQLmedMarcusUppgift1
         {
             ObamaTree obama = new ObamaTree();
             obama.SetUp();
-            obama.MainMenu();
+            obama.StartMenu();
             Console.ReadLine();
         }
     }

@@ -7,6 +7,10 @@ namespace SQLmedMarcusUppgift1
 {
     internal class ObamaTree
     {
+        /// <summary>
+        /// Kontrollerar om databasen ObamaTree finns.
+        /// Gör den inte det så skapas den.
+        /// </summary>
         public void SetUp()
         {
             Crud crud = new Crud();
@@ -28,8 +32,11 @@ namespace SQLmedMarcusUppgift1
                 crud.FillObamaTree(table, lines);
             }
         }
-
-        public void MainMenu()
+        /// <summary>
+        /// Start menyn för programmet, från denna menyn tar sig användaren
+        /// vidare till alla andra menyer beroende på val.
+        /// </summary>
+        public void StartMenu()
         {
             bool keepGoing = true;
             while (keepGoing)
@@ -63,7 +70,9 @@ namespace SQLmedMarcusUppgift1
                 }
             }
         }
-
+        /// <summary>
+        /// Menyn där användaren kan göra en rad olika sökningar på den valda personen.
+        /// </summary>
         private void SearchObamaTree()
         {
             bool keepGoing = true;
@@ -100,7 +109,7 @@ namespace SQLmedMarcusUppgift1
                         break;
 
                     case 5:
-                        MainMenu();
+                        StartMenu();
                         break;
 
                     default:
@@ -144,7 +153,10 @@ namespace SQLmedMarcusUppgift1
                 }
             }
         }
-
+        /// <summary>
+        /// Menyn där användaren kan välja vilka delar av personen som skall editeras.
+        /// </summary>
+        /// <param name="person"></param>
         private void SelectedPerson(List<string> person)
         {
             bool keepGoing = true;
@@ -183,7 +195,10 @@ namespace SQLmedMarcusUppgift1
                 }
             }
         }
-
+        /// <summary>
+        /// Metoden visar användaren vilka, om några syskon vald person har.
+        /// </summary>
+        /// <param name="person"></param>
         private void ShowSiblings(List<string> person)
         {
             Console.Clear();
@@ -205,7 +220,10 @@ namespace SQLmedMarcusUppgift1
             Console.WriteLine("Press any key to continue.");
             Console.ReadKey();
         }
-
+        /// <summary>
+        /// Metoden DeletePerson() låter användaren ta bort en person från databasen.
+        /// </summary>
+        /// <param name="person"></param>
         private void DeletePerson(List<string> person)
         {
             Crud crud = new Crud();
@@ -220,7 +238,10 @@ namespace SQLmedMarcusUppgift1
                 SearchObamaTree();
             }
         }
-
+        /// <summary>
+        /// Låter användaren editera en persons alla delar i databasen.
+        /// </summary>
+        /// <param name="person"></param>
         private void EditPerson(List<string> person)
         {
             bool keepGoing = true;
@@ -333,7 +354,14 @@ namespace SQLmedMarcusUppgift1
                 crud.UpdatePerson(person);
             }
         }
-
+        /// <summary>
+        /// Kontrollerar om användarens inmatade förälder redan finns i databasen och ger användaren
+        /// möjlighet att skapa en mor eller far förälder eller använda en befintlig person som förälder.
+        /// 
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private string CreateParent(string parent, string type)
         {
             Console.Write($"{parent} does not exist in the database, do you want to add {type}? (y/n) ");
@@ -348,14 +376,21 @@ namespace SQLmedMarcusUppgift1
                 return "0";
             }
         }
-
+        /// <summary>
+        /// Kontrollerar vilket id personen som sist lades till har.
+        /// Detta för att kunna använda det ID´t till att lägga till Mother och Father ID.
+        /// </summary>
+        /// <returns></returns>
         private string GetLastAddedId()
         {
             Crud crud = new Crud();
             List<List<string>> people = crud.GetAllObamas();
             return people[^1][0];
         }
-
+        /// <summary>
+        /// Visar vald persons info högst upp i konsolen för användaren.
+        /// </summary>
+        /// <param name="person"></param>
         private static void DisplayInfo(List<string> person)
         {
             Crud crud = new Crud();
@@ -385,13 +420,20 @@ namespace SQLmedMarcusUppgift1
             }
             Console.WriteLine("\n");
         }
-
+        /// <summary>
+        /// Lägger till användarens inmatningar i databasen.
+        /// </summary>
+        /// <param name="question"></param>
+        /// <param name="person"></param>
         public static void AddToList(string question, List<string> person)
         {
             Console.Write(question);
             person.Add(Console.ReadLine());
         }
-
+        /// <summary>
+        /// Låter användaren mata in för och efternamn samt födelsedata på personen
+        /// som skall läggas till i databasen.
+        /// </summary>
         private void AddPerson()
         {
             Console.Clear();
