@@ -75,7 +75,18 @@ namespace SQLmedMarcusUppgift1
 
         private void AddPerson()
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            List<string> person = new List<string>();
+            AddToList("Enter the persons first name: ", person);
+            AddToList("Enter the persons last name: ", person);
+            AddToList("Enter the persons date of birth: ", person);
+            for (int i = 0; i < 3; i++)
+            {
+                person.Add("0");
+            }
+            Crud crud = new Crud();
+            crud.CreatePerson(person);
+            Console.WriteLine(person[0] + " " + person[1] + "was added to the ObamaTree!");
         }
     }
 }
