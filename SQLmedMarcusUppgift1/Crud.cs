@@ -36,6 +36,20 @@ namespace SQLmedMarcusUppgift1
             DatabaseName = dBName;
         }
 
+        internal void CreateTable(string tableName, string columns)
+        {
+            string query = $"CREATE TABLE {tableName} ({columns})";
+            ExecuteQuery(query);
+        }
+
+        internal void FillObamaTree(string table, string[] lines)
+        {
+            foreach (string line in lines)
+            {
+                AddToTable(table, line);
+            }
+        }
+
         public DataTable GetDataTable(string query, params (string name, string value)[] parameters) // name = @, value = variablen vi skyddat med key.
         {
             DataTable dataTable = new DataTable();
@@ -57,14 +71,6 @@ namespace SQLmedMarcusUppgift1
                 }
             }
             return dataTable;
-        }
-
-        internal void FillObamaTree(string table, string[] lines)
-        {
-            foreach (string line in lines)
-            {
-                AddToTable(table, line);
-            }
         }
 
         public void AddToTable(string table, string line)
@@ -125,7 +131,6 @@ namespace SQLmedMarcusUppgift1
         public List<List<string>> SearchByName(string name)
         {
 
-
             string query = "SELECT * FROM Obamas WHERE ";
             (string, string)[] parameters;
             if (name.Contains(" "))
@@ -148,12 +153,6 @@ namespace SQLmedMarcusUppgift1
             }
             DataTable dataTable = GetDataTable(query, parameters);
             return GetListOfPersons(dataTable);
-        }
-
-        internal void CreateTable(string tableName, string columns)
-        {
-            string query = $"CREATE TABLE {tableName} ({columns})";
-            ExecuteQuery(query);
         }
 
         internal void CreatePerson(List<string> person)

@@ -256,20 +256,6 @@ namespace SQLmedMarcusUppgift1
                                 Console.WriteLine("Invalid choice, try again! Press any key to continue.");
                                 Console.ReadKey();
                             }
-                            // Låt anv. välja vem som är rätt mamma. eller trycka 0 om ingen stämmer.
-                            // Om anv. väljer ett nummer som är större än 0 och mindre eller lika med people.Count.
-                            // Då blir p[0] idt som ska stoppas in i person[5].
-                            // person[5] = people[choice - 1][0];
-                            // håkan.MotherId = Agda.Id
-
-                            // 1. Agda Klar
-                            // 2. Siv Fin
-                            // 3. None of the above
-                            // choice = 3
-                            // people.Count == 2
-                            // agda = people[0]
-                            // Siv = people[1]
-                            // people[3 - 1]
                         }
                         else
                         {
@@ -315,7 +301,22 @@ namespace SQLmedMarcusUppgift1
             } 
         }
 
-        private string CreateParent(string mother, string v)
+        private string CreateParent(string parent, string type)
+        {
+            Console.Write($"{parent} does not exist in the database, do you want to add {type}? (y/n) ");
+            string yesNo1 = Console.ReadLine().ToLower();
+            if (yesNo1 == "y")
+            {
+                AddPerson();
+                return GetLastAddedId();
+            }
+            else
+            {
+                return "0";
+            }
+        }
+
+        private string GetLastAddedId()
         {
             throw new NotImplementedException();
         }
