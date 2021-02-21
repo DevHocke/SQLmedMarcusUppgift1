@@ -29,6 +29,13 @@ namespace SQLmedMarcusUppgift1
             return false;
         }
 
+        public void CreateDatabase(string dBName)
+        {
+            string query = $"CREATE DATABASE {dBName}";
+            ExecuteQuery(query);
+            DatabaseName = dBName;
+        }
+
         public DataTable GetDataTable(string query, params (string name, string value)[] parameters) // name = @, value = variablen vi skyddat med key.
         {
             DataTable dataTable = new DataTable();
@@ -94,6 +101,11 @@ namespace SQLmedMarcusUppgift1
             }
         }
 
+        internal List<List<string>> SearchByName(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         internal void CreateTable(string tableName, string columns)
         {
             string query = $"CREATE TABLE {tableName} ({columns})";
@@ -137,10 +149,27 @@ namespace SQLmedMarcusUppgift1
             }
 
         }
-
-        private void UpdatePerson(List<string> pers)
+        /// <summary>
+        /// Sends the query and paremeters to the method ExecuteQuery
+        /// where the person UpdatePerson() takes in is updated.
+        /// </summary>
+        /// <param name="person"></param>
+        public void UpdatePerson(List<string> person)
         {
-            throw new NotImplementedException();
+            string query = "UPDATE Obamas SET first_name = @fName, last_name = @lName, " +
+                "date_of_birth = @dob, date_of_death = @dod, mother_id = @mId, father_id = @fId " +
+                "WHERE ID = @id";
+            (string, string)[] parameters = new (string, string)[]
+            {
+                ("@id", person[0]),
+                ("@fName", person[1]),
+                ("@lName", person[2]),
+                ("@dob", person[3]),
+                ("@dod", person[4]),
+                ("@mId", person[5]),
+                ("@fId", person[6])
+            };
+            ExecuteQuery(query, parameters);
         }
 
         private List<List<string>> GetListOfPersons(DataTable dataTable)

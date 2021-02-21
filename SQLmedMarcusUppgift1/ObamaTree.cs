@@ -64,7 +64,78 @@ namespace SQLmedMarcusUppgift1
 
         private void SearchObamaTree()
         {
-            throw new NotImplementedException();
+            bool keepGoing = true;
+            while (keepGoing)
+            {
+                Console.Clear();
+                Crud crud = new Crud();
+                Console.WriteLine("What do you want to search for?");
+                Console.WriteLine("1. Search after first or last name.");
+                Console.WriteLine("2. Search for Obamas with missing data.");
+                Console.WriteLine("3. List all the Obamas in the database.");
+                Console.WriteLine("4. Search Obamas born a certain year.");
+                Console.WriteLine("5. Go back.");
+                int.TryParse(Console.ReadLine(), out int choice);
+                List<List<string>> persons = new List<List<string>>();
+                switch (choice)
+                {
+                    case 1:
+                        Console.Write("Enter a name: ");
+                        persons = crud.SearchByName(Console.ReadLine());
+                        break;
+                    case 2:
+                        persons = crud.MissingData();
+                        break;
+                    case 3:
+                        persons = crud.GetAllObamas();
+                        break;
+                    case 4:
+                        Console.Write("Enter a year: ");
+                        persons = crud.SearchbyYear(Console.ReadLine());
+                        break;
+                    case 5:
+                        MainMenu();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, try again! Press any key to continue.");
+                        Console.ReadKey();
+                        break;
+                }
+
+                if (persons.Count > 0)
+                {
+                    while (true)
+                    {
+                        Console.Clear();
+                        int counter = 1;
+                        foreach (List<string> person in persons)
+                        {
+                            Console.WriteLine($"{counter++}. {person[1]} {person[2]} {person[3]}");
+                        }
+                        Console.WriteLine($"{counter}. Go back");
+                        Console.Write("Make a choice: ");
+                        int.TryParse(Console.ReadLine(), out choice);
+                        if (choice > 0 && choice <= persons.Count)
+                        {
+                            SelectedPerson(persons[choice - 1]);
+                        }
+                        else if (choice == counter)
+                        {
+                            SearchObamaTree();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid choice, try again! Press any key to continue.");
+                            Console.ReadKey();
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No Obama match your search! Try again.");
+                    Console.ReadKey();
+                }
+            }
         }
 
         public static void AddToList(string question, List<string> person)
