@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Text;
 
 namespace SQLmedMarcusUppgift1
@@ -193,9 +194,16 @@ namespace SQLmedMarcusUppgift1
             }
         }
 
-        internal List<List<string>> GetSiblings(List<string> person)
+        public List<List<string>> GetSiblings(List<string> person)
         {
-            throw new NotImplementedException();
+            string query = "SELECT * FROM Obamas WHERE (mother_id = @mId AND mother_id > 0) OR (father_id = @fId AND father_id > 0)";
+            (string, string)[] parameters = new (string, string)[]
+            {
+                ("@mId", person[5]),
+                ("@fId", person[6])
+            };
+            DataTable dataTable = GetDataTable(query, parameters);
+            return GetListOfPersons(dataTable).Where(s => s[0] != person[0]).ToList();
         }
 
         /// <summary>

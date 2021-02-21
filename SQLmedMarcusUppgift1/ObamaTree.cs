@@ -340,9 +340,34 @@ namespace SQLmedMarcusUppgift1
             return people[^1][0];
         }
 
-        private void DisplayInfo(List<string> person)
+        private static void DisplayInfo(List<string> person)
         {
-            throw new NotImplementedException();
+            Crud crud = new Crud();
+            Console.WriteLine($"Name: {person[1]} {person[2]}");
+            Console.WriteLine($"Born: {person[3]}");
+
+            Console.Write("Deceased: ");
+            if (person[4] != "0")
+            {
+                Console.Write(person[4]);
+            }
+            Console.WriteLine();
+
+            Console.Write("Mother: ");
+            if (person[5] != "0")
+            {
+                List<string> mother = crud.SearchById(person[5]);
+                Console.Write(mother[1] + " " + mother[2]);
+            }
+            Console.WriteLine();
+
+            Console.Write("Father: ");
+            if (person[6] != "0")
+            {
+                List<string> father = crud.SearchById(person[6]);
+                Console.Write(father[1] + " " + father[2]);
+            }
+            Console.WriteLine("\n");
         }
 
         public static void AddToList(string question, List<string> person)
