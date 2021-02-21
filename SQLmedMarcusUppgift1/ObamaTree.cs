@@ -197,6 +197,126 @@ namespace SQLmedMarcusUppgift1
 
         private void EditPerson(List<string> person)
         {
+            bool keepGoing = true;
+            while (keepGoing)
+            {
+                Console.Clear();
+                DisplayInfo(person);
+                Console.WriteLine("What do you want to update?");
+                Console.WriteLine("1. First name.");
+                Console.WriteLine("2. Last name.");
+                Console.WriteLine("3. Date of birth.");
+                Console.WriteLine("4. Date of Death.");
+                Console.WriteLine("5. Mother.");
+                Console.WriteLine("6. Father.");
+                Console.WriteLine("7. Go back.");
+                int.TryParse(Console.ReadLine(), out int choice);
+                Crud crud = new Crud();
+                switch (choice)
+                {
+                    case 1:
+                        Console.Write("First name: ");
+                        person[1] = Console.ReadLine();
+                        break;
+                    case 2:
+                        Console.Write("Last name: ");
+                        person[2] = Console.ReadLine();
+                        break;
+                    case 3:
+                        Console.Write("Date of birth: ");
+                        person[3] = Console.ReadLine();
+                        break;
+                    case 4:
+                        Console.Write("Date of death: ");
+                        person[4] = Console.ReadLine();
+                        break;
+                    case 5:
+                        Console.Write("Enter mother's name: ");
+                        string mother = Console.ReadLine();
+                        List<List<string>> people = crud.SearchByName(mother);
+                        if (people.Count > 0)
+                        {
+                            int counter = 1;
+                            foreach (List<string> peopleM in people)
+                            {
+                                Console.WriteLine($"{counter++} {peopleM[1]} {peopleM[2]} {peopleM[3]}");
+                            }
+                            Console.WriteLine($"{counter}. None of the above.");
+                            int.TryParse(Console.ReadLine(), out choice);
+                            if (choice > 0 && choice <= people.Count)
+                            {
+                                person[5] = people[choice - 1][0];
+                            }
+                            else if (choice == counter)
+                            {
+                                person[5] = CreateParent(mother, "her");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid choice, try again! Press any key to continue.");
+                                Console.ReadKey();
+                            }
+                            // Låt anv. välja vem som är rätt mamma. eller trycka 0 om ingen stämmer.
+                            // Om anv. väljer ett nummer som är större än 0 och mindre eller lika med people.Count.
+                            // Då blir p[0] idt som ska stoppas in i person[5].
+                            // person[5] = people[choice - 1][0];
+                            // håkan.MotherId = Agda.Id
+
+                            // 1. Agda Klar
+                            // 2. Siv Fin
+                            // 3. None of the above
+                            // choice = 3
+                            // people.Count == 2
+                            // agda = people[0]
+                            // Siv = people[1]
+                            // people[3 - 1]
+                        }
+                        else
+                        {
+                            person[5] = CreateParent(mother, "her");
+                        }
+                        break;
+                    case 6:
+                        Console.Write("Enter father's name: ");
+                        string father = Console.ReadLine();
+                        people = crud.SearchByName(father);
+                        if (people.Count > 0)
+                        {
+                            int counter = 1;
+                            foreach (List<string> peopleF in people)
+                            {
+                                Console.WriteLine($"{counter++} {peopleF[1]} {peopleF[2]} {peopleF[3]}");
+                            }
+                            Console.WriteLine($"{counter}. None of the above.");
+                            int.TryParse(Console.ReadLine(), out choice);
+                            if (choice > 0 && choice <= people.Count)
+                            {
+                                person[6] = people[choice - 1][0];
+                            }
+                            else if (choice == counter)
+                            {
+                                person[6] = CreateParent(father, "him");
+                            }
+                        }
+                        else
+                        {
+                            person[6] = CreateParent(father, "him");
+                        }
+                        break;
+                    case 7:
+                        keepGoing = false;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice, try again! Press any key to continue.");
+                        Console.ReadKey();
+                        break;
+                }
+                crud.UpdatePerson(person);
+            } 
+        }
+
+        private string CreateParent(string mother, string v)
+        {
             throw new NotImplementedException();
         }
 
