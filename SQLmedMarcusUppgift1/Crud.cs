@@ -195,6 +195,19 @@ namespace SQLmedMarcusUppgift1
 
         private List<List<string>> GetListOfPersons(DataTable dataTable)
         {
+            List<List<string>> persons = new List<List<string>>();
+            if (dataTable.Rows.Count > 0)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    persons.Add(RowToList(row));
+                }
+            }
+            return persons;
+        }
+
+        private List<string> RowToList(DataRow row)
+        {
             throw new NotImplementedException();
         }
     }
